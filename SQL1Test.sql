@@ -344,7 +344,7 @@ select employees.name as emp_name,
 departments.name as dept_name,
 salary
 from employees
-left join departments
+inner join departments
 on employees.dept = departments.id
 where salary > (
     select AVG(salary)
