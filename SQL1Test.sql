@@ -213,6 +213,8 @@ and country !='China'
 and country !='Japan'
 order by user_id ASC;
 
+-- 논리적으로 NOT IN(집합 개념) 와 != , AND 조합은 논리적으로 동일함.
+
 +-------------+-------------+------+-----+---------+-------+
 | Field       | Type        | Null | Key | Default | Extra |
 +-------------+-------------+------+-----+---------+-------+
@@ -350,6 +352,13 @@ where salary > (
     select AVG(salary)
     from employees
 ) and employees.name like 'C%';
+
+--튜터 가이드 답변!!!!
+SELECT employees.name AS emp_name, departments.name AS dept_name, employees.salary
+FROM employees
+INNER JOIN departments ON departments.id = employees.dept
+AND employees.name like 'C%'
+AND salary > (SELECT AVG(salary) FROM employees);
 
 +--------+-------------+------+-----+---------+-------+
 | Field  | Type        | Null | Key | Default | Extra |
