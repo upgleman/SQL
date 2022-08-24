@@ -648,7 +648,8 @@ where EXISTS (
     from RESERVATION
     where canceled=FALSE 
     and MEMBER.member_id=RESERVATION.member_id
-);
+)
+order by MEMBER.member_id asc;
 
 +-------------+--------------+------+-----+---------+-------+
 | Field       | Type         | Null | Key | Default | Extra |
