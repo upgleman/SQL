@@ -651,6 +651,19 @@ where EXISTS (
 )
 order by MEMBER.member_id asc;
 
+--튜더 가이드 답안 추가 : exists 서브쿼리 내의 select 절에는 아무 의미 없는 값을 넣으셔도 됩니다. 어차피 특정 데이터 로우가 존재하느냐만 확인하기 때문에 Select의 의미가 사라집니다.
+select m.member_id, member_name, number, email
+from MEMBER m
+inner join MEMBER_DTL md
+on m.member_id = md.member_id
+where exists(
+    select 1
+    from RESERVATION r
+    where r.member_id = m.member_id
+    and canceled = false
+)
+ORDER BY member_id ASC;
+
 +-------------+--------------+------+-----+---------+-------+
 | Field       | Type         | Null | Key | Default | Extra |
 +-------------+--------------+------+-----+---------+-------+
