@@ -1,5 +1,12 @@
 --02 JOIN 심화
 --[실습1] FROM절 JOIN 형태 - INNER JOIN/ON(1)
+-- EMPLOYEE 테이블과 POSITION_T 테이블에는 각 테이블의 구조에 맞도록 사원 정보 및 직급 정보가 담겨 있습니다.
+
+-- EMPLOYEE 테이블의 사원 정보에는 직급의 명칭이 담겨있지 않고, 어떤 직급인지에 대한 직급 ID가 담겨있습니다.
+
+-- 각 사원 정보에 따라서 직급 명칭을 알기 위해 INNER JOIN과 ON을 활용하여 사원 번호(EMPLOYEE_ID), 이름(NAME), 직급 명칭(POSITION_NAME) 을 조회하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- EMPLOYEE테이블과 POSITION_T 테이블에서 직급 ID(POSITION_ID) 가 같은 데이터에 대해 INNER JOIN절 과 ON절을 이용하여 사원 번호(EMPLOYEE_ID), 이름(NAME), 직급 명칭(POSITION_NAME) 을 조회하는 쿼리를 작성하세요.
 
 -- 아래 쿼리는 EMPLOYEE, POSITION_T 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC EMPLOYEE;
@@ -59,6 +66,13 @@ order by a.EMPLOYEE_ID asc;
 +-------------+------+---------------+
 
 --[실습2] FROM절 JOIN 형태 - INNER JOIN/ON(2)
+-- STORE 테이블에는 가게 타입 코드와 가게 이름 정보가 담겨 있으며, STORE_TYPE_CODE 테이블에는 가게 타입 코드와 타입 이름 정보가 담겨 있습니다.
+
+-- STORE 테이블에는 어떠한 타입의 가게인지 가게 타입 이름이 저장되어 있지 않고, 가게 타입 코드 정보가 저장되어 있습니다. STORE_TYPE_CODE 테이블을 이용하여 STORE 테이블에서 각 가게가 어떤 가게 타입인지 코드가 아닌 이름으로 표현되도록 쿼리를 작성해봅시다.
+
+-- STORE 테이블에 대해서 STORE_TYPE_CODE 테이블과 가게 타입 코드(store_type_code) 를 이용하여 INNER JOIN를 실시해 가게 이름(store_name)과 타입 이름(store_type_name) 을 조회하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- STORE테이블과 STORE_TYPE_CODE 테이블에서 가게 타입 코드(store_type_code) 가 같은 데이터에 대해 INNER JOIN절 과 ON절을 이용하여 가게 이름(store_name)과 타입 이름(store_type_name) 을 조회하는 쿼리를 작성하세요.
 
 -- 아래 쿼리는 STORE, STORE_TYPE_CODE 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC STORE;
@@ -120,7 +134,18 @@ order by A.store_name asc;
 +------------+-----------------+
 
 --[실습3] FROM절 JOIN 형태 - INNER JOIN/USING
+-- STUDENT 테이블에는 학생 번호와 학생 이름 정보가, CLASS 테이블에는 과목 번호와 과목 이름이, 그리고 CLASS_REQUEST테이블에는 신청 번호에 대한 학생 번호와 과목 번호 정보가 담겨 있습니다.
 
+-- CLASS_REQUEST 테이블에는 학생 이름과 과목 이름 정보가 담겨있지 않고, 학생 번호와 과목 번호 정보가 담겨있습니다.
+-- 이에 대해서 CLASS_REQUEST의 각 데이터에 대해 과목 이름과 학생 이름 정보를 함께 출력해봅시다.
+
+-- CLASS_REQUEST 테이블을 기준으로, 신청 번호에 따른 학생 이름과 과목 이름의 정보를 조회하려고 합니다. JOIN 절과 USING 절을 이용하여, CLASS_REQUEST 테이블에 STUDENT 테이블과 CLASS 테이블을 결합하여, 신청 번호(REQUEST_ID), 학생 이름(STUDENT_NAME), 과목 이름(CLASS_NAME) 정보를 조회하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- CLASS_REQUEST테이블에 대해 STUDENT 테이블을 INNER JOIN절 과 USING절을 이용하여 결합하고 신청 번호(REQUEST_ID)와 학생 이름(STUDENT_NAME) 을 조회하는 쿼리를 작성하세요.
+
+-- CLASS_REQUEST테이블에 대해 CLASS 테이블을 INNER JOIN절 과 USING절을 이용하여 결합하고 신청 번호(REQUEST_ID)와 과목 이름(CLASS_NAME) 을 조회하는 쿼리를 작성하세요.
+
+-- CLASS_REQUEST테이블에 대해 STUDENT 테이블과 CLASS테이블을 INNER JOIN절 과 USING절을 이용하여 결합하고 신청 번호(REQUEST_ID)와 학생 이름(STUDENT_NAME), 과목 이름(CLASS_NAME) 을 조회하는 쿼리를 작성하세요.
 -- 아래 쿼리는 CLASS_REQUEST, STUDENT, CLASS 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC CLASS_REQUEST;
 DESC STUDENT;
@@ -220,6 +245,13 @@ order by REQUEST_ID;
 +------------+--------------+------------+
 
 --[실습4] FROM절 JOIN 형태 - NATURAL JOIN
+-- LOGIN_HISTORY 테이블에는 멤버의 로그인 이력 정보가 담겨있으며, MEMBER 테이블에는 멤버의 정보가 담겨있습니다.
+
+-- 하지만 LOGIN_HISTORY 테이블에는 멤버의 이름 정보가 담겨 있지 않고, 멤버 ID정보가 담겨있습니다. JOIN을 활용하여 로그인 이력 정보에 멤버 이름을 함께 출력해봅시다.
+
+-- LOGIN_HISTORY 테이블에 있는 멤버 ID(MEMBER_ID) 를 통해 MEMBER테이블과 NATURAL JOIN으로 결합해 로그인 이력 ID(login_history_id), 멤버 이름(member_name), 멤버 이메일(member_email), 로그인 시각(login_date) 정보를 출력하는 쿼리를 작성해봅시다.
+-- 시사항
+-- LOGIN_HISTORY테이블과 MEMBER 테이블에 대해 NATURAL JOIN을 이용하여 로그인 이력 ID(login_history_id), 멤버 이름(member_name), 멤버 이메일(member_email), 로그인 시각(login_date) 을 조회하는 쿼리를 작성하세요.
 
 -- 아래 쿼리는 LOGIN_HISTORY, MEMBER 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC LOGIN_HISTORY;
@@ -272,7 +304,14 @@ order by login_history_id;
 +------------------+-------------+----------------+---------------------+
 
 --[실습5] FROM절 JOIN 형태 - CROSS JOIN
+-- FIRST_NAME_T 테이블과 LAST_NAME_T 테이블에는 각 테이블의 구조에 맞도록 id 값과 first_name 또는 last_name 정보가 담겨 있습니다.
 
+-- FIRST_NAME_T 테이블의 데이터와 LAST_NAME_T 테이블의 데이터를 결합하면 가상의 이름 데이터 하나가 출력됩니다. 그럼 각 테이블의 모든 데이터를 이용하여 first_name과 last_name에 대한 모든 경우의 수를 구해봅시다.
+
+-- 가능한 이름의 조합에 대해 모든 경우의 수를 출력하기 위해 CROSS JOIN을 활용하려고 합니다.
+-- FIRST_NAME_T 테이블과 LAST_NAME_T 테이블에 대해서 CROSS JOIN을 통해 결합하여 first_name과 last_name을 출력하여 가능한 모든 케이스를 조회하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- FIRST_NAME_T 테이블과 LAST_NAME_T 테이블을 CROSS JOIN으로 결합하고 first_name, last_name 을 출력하는 쿼리를 작성하세요.
 -- 아래 쿼리는 FIRST_NAME_T, LAST_NAME_T 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC FIRST_NAME_T;
 DESC LAST_NAME_T;
@@ -327,7 +366,16 @@ order by first_name asc, last_name asc;
 +------------+-----------+
 
 --[실습6] FROM절 JOIN 형태 - LEFT OUTER JOIN
+-- MEMBER 테이블에는 멤버 ID, 멤버 이름 정보가 담겨 있으며, MEMBER_EMAIL 테이블에는 ID와 멤버 ID, EMAIL 정보가 담겨있습니다.
 
+-- MEMBER 테이블에 있는 멤버들의 정보에 대해 MEMBER_EMAIL 테이블의 EMAIL정보와 함께 출력하려고 합니다.
+-- 하지만, 일부 멤버는 MEMBER_EMAIL 테이블에 EMAIL 정보가 없습니다. EMAIL 정보가 없는 멤버들은 출력되지 않는 것이 아니라, EMAIL 값을 NULL로 출력해봅시다.
+
+-- MEMBER 테이블의 멤버 ID 정보와, MEMBER_EMAIL 테이블의 멤버 ID 정보를 기준으로 2개의 테이블을 결합하려 합니다. 이때 MEMBER 테이블을 기준으로하여, MEMBER 테이블의 정보는 모두 출력하되 MEMBER_EMAIL에 없는 EMAIL 정보는 NULL로 출력하려고 합니다.
+
+-- 학습한 LEFT OUTER JOIN을 활용하여 멤버 이름(member_name)과 이메일(email) 을 조회하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- MEMBER테이블과 MEMBER_EMAIL 테이블에 대해 LEFT OUTER JOIN으로 결합하되 기준 테이블은 MEMER테이블로 진행하여, 멤버 이름(member_name)과 이메일(email) 을 조회하는 쿼리를 작성하세요.
 -- 아래 쿼리는 MEMBER, MEMBER_EMAIL 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC MEMBER;
 DESC MEMBER_EMAIL;
@@ -384,7 +432,14 @@ order by member_name ASC;
 +--------------+-------------------+
 
 --[실습7] FROM절 JOIN 형태 - RIGHT OUTER JOIN
+-- RESPONSE_DTL 테이블에는 응답 ID와 응답 내용이 담겨있으며, REQUEST 테이블에는 요청 ID, 요청 멤버 ID, 응답 ID가 담겨 있습니다.
 
+-- RESPONSE_DTL 테이블의 응답 내용과, REQUEST 테이블의 요청 멤버 ID 정보를 함께 출력하려고 합니다.
+-- 하지만 이때 응답 내용이 없는 응답 ID가 존재하지만, 이러한 경우 응답 내용을 NULL로 출력하고자 합니다.
+
+-- RESPONSE_DTL 테이블을 기준으로 하여 REQUEST 테이블과 응답 ID(response_id) 컬럼으로 RIGHT OUTER JOIN을 실시하여, 요청 ID(request_id), 요청 멤버 ID(request_member_id), 응답 내용(response_content) 를 출력하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- RESPONSE_DTL테이블과 REQUEST 테이블을 응답 ID(response_id) 를 기준으로 RIGHT OUTER JOIN을 실시하여 요청 ID(request_id), 요청 멤버ID(request_member_id), 응답 내용(response_content) 를 조회하는 쿼리를 작성하세요.
 -- 아래 쿼리는 RESPONSE_DTL, REQUEST 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC RESPONSE_DTL;
 DESC REQUEST;
@@ -438,7 +493,20 @@ order by request_id ASC;
 +------------+-------------------+------------------+
 
 --[실습8] FROM절 JOIN 형태 - FULL OUTER JOIN
+-- FRONT_VERSION_HIST 테이블과 BACK_VERSION_HIST 테이블에는 각 버전 ID 값과 버전 내용이 담겨 있습니다.
 
+-- 버전 ID를 기준으로 프론즈 버전 내용과, 백 버전 내용을 함께 출력하고자 합니다.
+-- 하지만 모든 버전 ID에 대해 프론트 버전 내용과 백 버전 내용이 존재하는 것은 아닙니다.
+-- 특정 버전 ID에 프론트 버전 내용이나 백 버전 내용이 없다면 NULL로 출력해봅시다.
+
+-- 두 개의 테이블에 대해서 FULL OUTER JOIN 개념을 활용해, 버전 ID(version_id), 프론트 버전 내용(version_content_front), 백 버전 내용(version_content_back) 에 대해서 출력하려고 합니다.
+-- 실습 환경이 MariaDB이기에 LEFT OUTER JOIN과 RIGHT OUTER JOIN을 활용하여 쿼리를 작성해보세요.
+-- 지시사항
+-- FRONT_VERSION_HIST테이블을 기준으로 BACK_VERSION_HIST 테이블과 버전 ID(version_id) 을 LEFT OUTER JOIN 을 통해 결합하여, 버전 ID(version_id), 프론트 버전 내용(version_content_front), 백 버전 내용(version_content_back) 을 조회하는 쿼리를 작성하세요.
+
+-- FRONT_VERSION_HIST테이블을 기준으로 BACK_VERSION_HIST 테이블과 버전 ID(version_id) 을 RIGHT OUTER JOIN 을 통해 결합하여, 버전 ID(version_id), 프론트 버전 내용(version_content_front), 백 버전 내용(version_content_back) 을 조회하는 쿼리를 작성하세요.
+
+-- 1번과 2번 에서 작성한 쿼리에서 정렬을 실행하는 ORDER BY문만 제거하고, 중복을 제거하는 집합 연산자UNION을 통해 결합하는 쿼리를 작성해주세요.
 -- 아래 쿼리는 FRONT_VERSION_HIST, BACK_VERSION_HIST 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC FRONT_VERSION_HIST;
 DESC BACK_VERSION_HIST;
@@ -538,7 +606,13 @@ ORDER BY version_id ASC;
 +------------+-----------------------+----------------------+
 
 --[실습9] FROM절 JOIN 형태 - INNER JOIN/ON/WHERE(1)
+-- REQUEST_HIST 테이블에는 요청 ID, 요청 상태, 요청 멤버 ID 정보가 담겨 있으며 MEMBER 테이블에는 멤버 ID, 멤버 이름 정보가 담겨 있습니다.
 
+-- 위의 테이블을 이용하여, 어떤 멤버의 요청이 fail처리 되었는지 확인해보려고 합니다. 이때 REQUEST_HIST 테이블에는 멤버 이름이 아닌, 요청 멤버 ID 정보가 담겨 있으므로 MEMBER 테이블과 INNER JOIN을 활용해 봅시다.
+
+-- REQUEST_HIST 테이블에서 요청상태가 fail 인 정보에 대해서만 조회하되, MEMBER 테이블과 INNER JOIN을 활용하여 요청 ID(request_id), 요청 상태(req_status), 멤버 이름(member_name) 을 출력하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- REQUEST_HIST테이블과 MEMBER 테이블에 대해서 멤버 ID(req_member_id와 member_id) 가 같은 데이터에 대해 INNER JOIN절과 ON절을 이용하고, 요청 상태(req_status) 가 fail인 데이터에 대해서 요청 ID(request_id), 요청 상태(req_status), 멤버 이름(member_name) 을 조회하는 쿼리를 작성하세요.
 -- 아래 쿼리는 REQUEST_HIST, MEMBER 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC REQUEST_HIST;
 DESC MEMBER;
@@ -592,7 +666,14 @@ where req_status = 'fail';
 +------------+------------+-------------+
 
 --[실습10] FROM절 JOIN 형태 - INNER JOIN/ON/WHERE(2)
+-- APPLICATION 테이블에는 앱 ID, 앱 Device 정보가 담겨 있으며, APPLICATION_DTL 테이블에는 앱 ID, 앱 이름, 앱 내용 정보가 담겨 있습니다.
 
+-- 모든 Device에서 실행이 가능하거나 ‘iphone’에서만 실행이 가능한 앱에 대한 정보를 출력하고자 합니다.
+-- 하지만, APPLICATION_DTL 테이블에는 앱 Device에 대한 정보가 없으니, 우선 APPLICATION테이블과 앱 ID를 활용하여 INNER JOIN을 실시하여 APPLICATION_DTL 테이블의 각 데이터에 올바른 앱 Device 데이터를 결합하고 이후 적절한 조건을 이용해봅시다.
+
+-- APPLICATION_DTL 테이블과 INNER JOIN을 활용하여 APPLICATION 테이블과 결합하고, 앱 Device가 ‘iphone’ 또는 ‘all’ 인 app_id에 대해서 앱 ID(app_id), 앱 이름(app_name), 앱 내용(app_content) 을 출력하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- APPLICATION테이블과 APPLICATION_DTL 테이블을 앱 ID(app_id) 를 기준으로 INNER JOIN을 통해 결합하고, 앱 Device(app_device)가 ‘iphone’ 또는 ‘all’인 데이터에 대해서, 앱 ID(app_id), 앱 이름(app_name), 앱 내용(app_content) 을 조회하는 쿼리를 작성하세요.
 -- 아래 쿼리는 APPLICATION, APPLICATION_DTL 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC APPLICATION;
 DESC APPLICATION_DTL;
@@ -646,7 +727,14 @@ order by app_id asc;
 +--------+----------+-------------+
 
 --[실습11] FROM절 JOIN 형태 - LEFT OUTER JOIN/WHERE
+-- AIR_ROUTE 테이블에는 경로 ID, 경로 FROM, 경로 TO 정보가 담겨있으며, AIRPLANE 테이블에는 비행기 ID, 경로 ID정보가 담겨있습니다.
 
+-- 두 개의 테이블을 이용하여, Korea에서 출발하는 경로에 대해 운행 가능한 비행기 ID를 함께 출력하고자 합니다.
+-- 이를 위해, 먼저 AIR_ROUTE 테이블과 AIRPLANE 테이블을 경로 ID로 결합한 후 경로 시작지점이 Korea인 데이터에 대해서 조회해봅시다.
+
+-- AIR_ROUTE 테이블을 기준으로, AIRPLANE 테이블과 경로 ID(route_id) 가 같은 데이터를 기준으로 결합하고 경로 FROM(route_from)이 Korea인 데이터에 대해서 경로 FROM(route_from), 경로 TO(route_to), 비행기 ID(airplane_id) 를 조회하는 쿼리를 작성해봅시다.
+-- 지시사항
+-- AIR_ROUTE테이블과 AIRPLANE 테이블에 대해 LEFT OUTER JOIN 을 활용하고 ON 조건에는 경로 ID(route_id)가 같다는 조건 을 표현하여 경로 FROM(route_from)이 Korea인 데이터에 대해서 경로 FROM(route_from), 경로 TO(route_to), 비행기 ID(airplane_id) 를 조회하는 쿼리를 작성하세요.
 -- 아래 쿼리는 AIR_ROUTE, AIRPLANE 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC AIR_ROUTE;
 DESC AIRPLANE;
@@ -698,7 +786,15 @@ order by airplane_id asc;
 +------------+----------+-------------+
 
 --[실습12] 셀프 조인
+-- EMPLOYEE 테이블에는 사원 ID, 사원 이름, 관리자 ID 정보가 담겨있습니다.
 
+-- 각 사원들의 관리자가 누구인지 확인하고자 합니다. 하지만 EMPLOYEE테이블에는 관리자 ID 만 함께 존재하기 때문에, 셀프 조인 개념을 이용하여 각 사원 정보와 관리자 이름을 함께 조회해봅시다.
+
+-- EMPLOYEE 테이블에 대해서 SELF JOIN을 이용하여, 사원 ID(employee_id), 사원 이름(employee_name), 관리자 이름(employee_name as manager_name) 을 출력하는 쿼리를 작성해봅시다.
+
+-- EMPLOYEE테이블의 구조는 다음과 같습니다.
+-- 지시사항
+-- EMPLOYEE테이블의 사원 ID(employee_id)와 관리자 ID(manager_id) 를 통해 SELF JOIN 을 실시하여 사원 ID(employee_id), 사원 이름(employee_name), 관리자 이름(employee_name as manager_name) 을 조회하는 쿼리를 작성하세요.
 -- 아래 쿼리는 EMPLOYEE 테이블의 구조를 나타냅니다. 해당 테이블을 수정할 필요는 없습니다.
 DESC EMPLOYEE;
 
