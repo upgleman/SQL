@@ -12,8 +12,9 @@ select * from shipments;
 -- select * from orders;
 -- select * from shipments;
 
--- select * from orders
--- where status = 1;
+-- 서브쿼리
+select MAX(arrival) as max_arr from orders
+where status = '1';
 
 -- select a.ship_id, b.ship_name, b.ship_color, a.arrival from orders as a
 -- inner join shipments as b
@@ -23,18 +24,46 @@ select * from shipments;
 --     from 
 -- )
 -- order by a.ship_id asc;
-select B.ship_id, B.ship_name, B.ship_color,
-(
-select distinct arrival from orders as A
-where status = 1 ) as last_arrival
-from shipments as B
-order by B.ship_id asc;
+--오답
+--1
+select a.ship_id, b.ship_name, b.ship_color, a.arrival
+from orders as a
+inner join shipments as b
+on a.ship_id = b.ship_id
+where arrival in (
+select arrival from orders
+where status = '1'
+)
+order by a.ship_id asc;
+--2
+select a.ship_id, a.ship_name, a.ship_color, MAX(arrival) as recent_arr
+from shipments as a
+join (
+    SELECT *
+    FROM
+        orders
+    WHERE
+        orders.status = 1
+) as b
+group by a.ship_id
+order by a.ship_id;
+
+--정답
+select a.ship_id, a.ship_name, a.ship_color, max(arrival) as recent_arr
+from shipments as a
+join (
+    SELECT *
+    FROM
+        orders
+    WHERE
+        orders.status = 1
+) as b
+on a.ship_id=b.ship_id
+group by a.ship_id
+order by a.ship_id;
 
 ---
-오답
-
----
-힌트
+--힌트
     MAX(arrival) AS '최근 배송 날짜'
 FROM
     shipments AS s
